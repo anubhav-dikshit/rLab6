@@ -4,6 +4,10 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+  [![Travis build status](https://travis-ci.com/anubhav-dikshit/rLab6.svg?branch=master)](https://travis-ci.com/anubhav-dikshit/rLab6)
+
+  [![Coverage status](https://codecov.io/gh/anubhav-dikshit/rLab6/branch/master/graph/badge.svg)](https://codecov.io/github/anubhav-dikshit/rLab6?branch=master)
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
