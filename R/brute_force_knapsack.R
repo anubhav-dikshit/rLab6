@@ -8,8 +8,11 @@
 #' @examples brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack <- function(x, W){
 
-# x = knapsack_objects[1:12,]
-# W = 3861
+  if (length(x) == 0 || W == 0){
+    return(0)}
+
+# x = knapsack_objects[1:8,]
+# W = 7573
 
 x$item <- rownames(x)
 x <- x[,c("item", "w", "v")]
@@ -20,11 +23,13 @@ items <- as.vector(x[, c("item")])
 
 appended_output <- all_combination(N,x,weights,items,value)
 appended_output$weight_match <- ifelse(appended_output$total_weight == W, "Match", "No-match")
-df_weight_match <- if(NROW(appended_output) == 1){appended_output[appended_output$weight_match == "Match",]}else{return("No match")}
+df_weight_match <- appended_output[appended_output$weight_match == "Match",]
 
-value = df_weight_match$total_value
+if(NROW(df_weight_match) != 1){return("No match found")}
+
+value = as.vector(df_weight_match$total_value)
 elements = as.vector(df_weight_match$total_item)
 
-return(list(value, elements))
+return(list(value = noquote(value), elements = noquote(elements)))
 }
 

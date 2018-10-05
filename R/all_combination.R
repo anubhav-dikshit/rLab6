@@ -18,10 +18,9 @@ N = NROW(x)
 weights <- as.vector(x[, c("w")])
 value <- as.vector(x[, c("v")])
 items <- as.vector(x[, c("item")])
-
+appended_output <- data.frame()
 
 for(i in 1:N){
-  if(i == 1){appended_output <- data.frame()}else{
     temp_weights <- gtools::combinations(n=N, r=i, v=weights, repeats.allowed = FALSE)
     temp_items <- gtools::combinations(n=N, r=i, v=items, repeats.allowed = FALSE)
     temp_value <- gtools::combinations(n=N, r=i, v=value, repeats.allowed = FALSE)
@@ -31,7 +30,7 @@ for(i in 1:N){
                     total_weight = rowSums(temp_weights))
 
     appended_output <- rbind(appended_output, output)
-  }}
+  }
   return(appended_output)
 }
 
