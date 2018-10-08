@@ -5,9 +5,23 @@
 #'
 #' @return NULL
 #' @export
-#' @examples brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+#' @importFrom utils combn
+#' @examples set.seed(42)
+#' n <- 2000
+#' knapsack_objects <- data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
+#'brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+#'
 brute_force_knapsack <- function(x, W){
+
     stopifnot(is.data.frame(x),is.numeric(W))
+    stopifnot(W > 0)
+
+  # reorder the items according to their weight to get near the maximum as soon as possible
+  x <- x[rev(order(x[,1])),]
+
+  # remove combinations that are invalid from the start
+  # only consider items with a weight that is less than the capacity
+  x <- x[x[,'w']<=W,]
     i=2
     optimum_value = 0
     selected_items = c()
