@@ -7,29 +7,34 @@
 #' @export
 #' @examples brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack <- function(x, W){
+    stopifnot(is.data.frame(x),is.numeric(W))
+    i=2
+    optimum_value = 0
+    selected_items = c()
+    weights<-c()
+    values<-c()
+    while(i<=nrow(x))
+    {
+      w<-as.data.frame(combn(x[,1], i))
+      v<-as.data.frame(combn(x[,2], i))
+      sumw<-colSums(w)
+      sumv<-colSums(v)
+      weights<-which(sumw<=W)
+      if(length(weights) != 0){
+        values<-sumv[weights]
+        optimum_value<-max(values)
+        temp<-which((values)==optimum_value)
+        maxValWghtIdx<-weights[temp]
+        maxValWght<-w[, maxValWghtIdx]
+        j<-1
+        while (j<=i){
+          selected_items[j]<-which(x[,1]==maxValWght[j])
+          j=j+1
+        }
+      }
+      i=i+1
 
-  if (length(x) == 0 || W == 0){
-    return(0)}
+    }
 
-# x = knapsack_objects[1:8,]
-# W = 7573
-
-x$item <- rownames(x)
-x <- x[,c("item", "w", "v")]
-N = NROW(x)
-weights <- as.vector(x[, c("w")])
-value <- as.vector(x[, c("v")])
-items <- as.vector(x[, c("item")])
-
-appended_output <- all_combination(N,x,weights,items,value)
-appended_output$weight_match <- ifelse(appended_output$total_weight == W, "Match", "No-match")
-df_weight_match <- appended_output[appended_output$weight_match == "Match",]
-
-if(NROW(df_weight_match) != 1){return("No match found")}
-
-value = as.vector(df_weight_match$total_value)
-elements = as.vector(df_weight_match$total_item)
-
-return(list(value = noquote(value), elements = noquote(elements)))
+    return(list(value=round(optimum_value),elements=selected_items))
 }
-

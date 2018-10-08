@@ -1,6 +1,6 @@
 knapsack_dynamic <- function(x, W){
-  x = knapsack_objects[1:12,]
-  W = 2000
+  # x = knapsack_objects[1:12,]
+  # W = 2000
 
   x$item <- rownames(x)
   x <- x[,c("item", "w", "v")]
