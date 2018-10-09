@@ -3,6 +3,7 @@
 #' @param x The input to function containing the number of items
 #' @param W The weights of the items
 #'
+#'
 #' @return NULL
 #' @export
 #' @importFrom utils combn
@@ -12,7 +13,6 @@
 #'brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 #'
 brute_force_knapsack <- function(x, W){
-
   original_value = x
 
     stopifnot(is.data.frame(x),is.numeric(W))
@@ -34,8 +34,10 @@ brute_force_knapsack <- function(x, W){
     {
       w<-as.data.frame(combn(x[,1], i))
       v<-as.data.frame(combn(x[,2], i))
-      sumw<-colSums(w)
-      sumv<-colSums(v)
+
+        sumw<-colSums(w) # most time consuming using profvis
+        sumv<-colSums(v) # most time consuming using profvis
+
       weights<-which(sumw<=W)
       if(length(weights) != 0){
         values<-sumv[weights]
