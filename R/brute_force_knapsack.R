@@ -13,6 +13,8 @@
 #'
 brute_force_knapsack <- function(x, W){
 
+  original_value = x
+
     stopifnot(is.data.frame(x),is.numeric(W))
     stopifnot(W > 0)
 
@@ -22,6 +24,7 @@ brute_force_knapsack <- function(x, W){
   # remove combinations that are invalid from the start
   # only consider items with a weight that is less than the capacity
   x <- x[x[,'w']<=W,]
+  elements <- rownames(x)
     i=2
     optimum_value = 0
     selected_items = c()
@@ -49,6 +52,8 @@ brute_force_knapsack <- function(x, W){
       i=i+1
 
     }
+    elem <- subset(original_value, w %in% maxValWght)
+    elem <- rownames(elem)
 
-    return(list(value=round(optimum_value),elements=selected_items))
+    return(list(value=round(optimum_value), elements=noquote(elem)))
 }

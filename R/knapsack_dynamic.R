@@ -13,9 +13,6 @@
 #'
 knapsack_dynamic <- function(x, W){
 
-  x = knapsack_objects[1:8,]
-  W = 3500
-
   stopifnot(is.data.frame(x),is.numeric(W))
   stopifnot(W > 0)
 
@@ -56,6 +53,6 @@ knapsack_dynamic <- function(x, W){
 
   inds <- which(x)
   elem <- elements[x]
-  prof <- sum(p[inds])
+  prof <- round(sum(p[inds]))
   return(list(value = prof, elements = noquote(elem)))
 }
