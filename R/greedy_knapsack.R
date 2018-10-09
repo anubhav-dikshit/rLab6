@@ -2,10 +2,7 @@
 #'
 #' @param x The input to function containing the number of items
 #' @param W The weights of the items
-#'
-#' @useDynLib rLab6, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
-NULL
+#' @param fast Whether to speed up using Rccp
 #'
 #' @return NULL
 #' @export
@@ -15,6 +12,9 @@ NULL
 #' knapsack_objects <- data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
 #'greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 #'
+#' @useDynLib rLab6, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+
 greedy_knapsack <- function(x, W, fast= NULL){
 
   stopifnot(is.data.frame(x),is.numeric(W))
