@@ -41,7 +41,9 @@ greedy_knapsack <- function(x, W, fast= NULL){
     prof <- round(vectorSum(x$v))
   }
 
+  elem <- noquote(elem)
 
-  return(list(value = prof, elements = noquote(elem)))
+
+  return(list(value = prof, elements = elem))
 
 }

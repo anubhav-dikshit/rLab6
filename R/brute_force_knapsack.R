@@ -55,7 +55,7 @@ brute_force_knapsack <- function(x, W){
 
     }
     elem <- subset(original_value, w %in% maxValWght)
-    elem <- rownames(elem)
+    elem <- noquote(rownames(elem))
 
-    return(list(value=round(optimum_value), elements=noquote(elem)))
+    return(list(value=round(optimum_value), elements=elem))
 }

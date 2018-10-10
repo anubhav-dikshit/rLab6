@@ -54,5 +54,6 @@ knapsack_dynamic <- function(x, W){
   inds <- which(x)
   elem <- elements[x]
   prof <- round(sum(p[inds]))
-  return(list(value = prof, elements = noquote(elem)))
+  elem <- noquote(elem)
+  return(list(value = prof, elements = elem))
 }
