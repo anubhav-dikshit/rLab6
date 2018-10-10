@@ -36,10 +36,10 @@ greedy_knapsack <- function(x, W, fast= NULL){
   x <- x[x$retain_in_bag == "Retain",]
 
   elem <- noquote(rownames(x))
-  prof <- round(sum(x$v))
+
   if(!is.null(fast)){
     prof <- round(vectorSum(x$v))
-  }
+  }else{prof <- round(sum(x$v))}
 
   elem <- noquote(elem)
 

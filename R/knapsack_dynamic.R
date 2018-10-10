@@ -5,6 +5,7 @@
 #'
 #' @return NULL
 #' @export
+#' @source http://www.es.ele.tue.nl/education/5MC10/Solutions/knapsack.pdf
 #'
 #' @examples set.seed(42)
 #' n <- 2000
