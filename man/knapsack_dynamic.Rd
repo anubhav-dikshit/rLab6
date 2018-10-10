@@ -3,6 +3,9 @@
 \name{knapsack_dynamic}
 \alias{knapsack_dynamic}
 \title{Title Dynamic Program Knapsack}
+\source{
+http://www.es.ele.tue.nl/education/5MC10/Solutions/knapsack.pdf
+}
 \usage{
 knapsack_dynamic(x, W)
 }
