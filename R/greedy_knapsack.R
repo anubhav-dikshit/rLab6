@@ -23,17 +23,17 @@ greedy_knapsack <- function(x, W, fast= NULL){
   x$v_by_w <- x$v/x$w
 
   # reorder the items according to their max profit per weight
-  x <- x[rev(order(x[,3])),]
+  x <- x[rev(order(x$v_by_w)),]
 
   x$max_weight <- W
 
-  # remove combinations that are invalid from the start
   # only consider items with a weight that is less than the capacity
   x <- x[x[,'w']<=W,]
   elements <- rownames(x)
-  x$running_weight <- cumsum(x$w)
-  x$retain_in_bag <- ifelse(x$running_weight <= x$max_weight, "Retain", "Drop")
-  x <- x[x$retain_in_bag == "Retain",]
+  x$running_weight_v_w <- cumsum(x$w)
+  x$retain_in_bag_v_w <- ifelse(x$running_weight_v_w <= x$max_weight, "Retain", "Drop")
+
+  x <- x[x$retain_in_bag_v_w == "Retain",]
 
   elem <- noquote(rownames(x))
 
