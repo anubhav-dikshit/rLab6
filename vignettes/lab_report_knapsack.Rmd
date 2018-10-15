@@ -52,6 +52,8 @@ All algorithms try to find - in a different way - the optimal filling of the kna
 ### `brute_force_knapsack(x, W)`
 ```{r, echo=FALSE, eval = TRUE}
 library(utils)
+library(rLab6)
+library(knitr)
 brute_force_knapsack <- function(x, W){
   original_value = x
 
@@ -224,3 +226,30 @@ greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500)
 end_time <- Sys.time()
 end_time - start_time
 ```
+### Code optimization
+
+Question: What performance gain could you get by trying to improving your code?
+```{r}
+library(profvis)
+library(microbenchmark)
+library(Rcpp)
+
+profvis(greedy_knapsack(x = knapsack_objects[1:100000,], W = 3500))
+```
+
+Question: What performance gain could you get by using Rcpp and C++?
+```{r eval=FALSE}
+# Cant compile C function in vignette, thus run in console after loading the package
+microbenchmark(greedy_knapsack(x = knapsack_objects[1:10000,], W = 3500),
+               greedy_knapsack(x = knapsack_objects[1:10000,], W = 3500, fast = TRUE))
+```
+
+```{r, echo=FALSE}
+result <- data.frame(expr =c("greedy_knapsack(x = knapsack_objects[1:10000, ], W = 3500)", "greedy_knapsack(x = knapsack_objects[1:10000, ], W = 3500, fast = TRUE)"), min = c(12.7947, 11.3946), lq =c(12.98865, 11.65790), mean =c(14.35950, 13.13924), median=c(13.85460, 12.59715))
+```
+Unit: milliseconds
+```{r}
+kable(result, format = "markdown")
+```
+Result: Thus the C code is about 1 millisecond or 7.69% faster than the R code
+
