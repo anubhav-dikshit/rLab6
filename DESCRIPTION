@@ -20,6 +20,8 @@ RoxygenNote: 6.1.0
 Imports: 
     gtools,
     utils,
-    Rcpp
+    Rcpp,
+    profvis,
+    microbenchmark
 LinkingTo: 
     Rcpp

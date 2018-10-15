@@ -232,9 +232,8 @@ Question: What performance gain could you get by trying to improving your code?
 ```{r}
 library(profvis)
 library(microbenchmark)
-library(Rcpp)
 
-profvis(greedy_knapsack(x = knapsack_objects[1:100000,], W = 3500))
+profvis::profvis(greedy_knapsack(x = knapsack_objects[1:100000,], W = 3500))
 ```
 
 Question: What performance gain could you get by using Rcpp and C++?
